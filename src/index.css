@@ -1,0 +1,5 @@
+body {
+  background: radial-gradient(ellipse at 10% 10%, rgba(110, 32, 150, 0.12) ,transparent 15%),
+              radial-gradient(ellipse at 90% 80%, rgba(46, 166, 155, 0.06), transparent 15%),
+              #07050a;
+}
