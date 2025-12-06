@@ -1,6 +1,6 @@
 // src/engine/GameEngine.tsx
-import React, { useMemo, useState } from 'react';
-import type { StoryNode, PlayerState } from '../types';
+import { useMemo, useState } from 'react';
+import type { PlayerState } from '../types';
 import { generateStory } from './storyGenerator';
 import { generateMoreauStory } from './moreauStory';
 import { mulberry32, randomInt } from '../utils/rng';

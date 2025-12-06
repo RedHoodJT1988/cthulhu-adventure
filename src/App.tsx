@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, Box, Typography, Button } from '@mui/material';
 import GameEngine from './engine/GameEngine';
 

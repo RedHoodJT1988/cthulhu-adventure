@@ -1,4 +1,3 @@
-import React from 'react';
 import { Paper, Box, Typography, LinearProgress } from '@mui/material';
 import type { PlayerState } from '../types';
 
