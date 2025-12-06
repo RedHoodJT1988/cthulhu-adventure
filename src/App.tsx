@@ -20,7 +20,7 @@ export default function App() {
         <Button variant="contained" onClick={() => newRun()}>New Run</Button>
       </Box>
 
-      <GameEngine seed={seed} />
+      <GameEngine key={seed} seed={seed} />
     </Container>
   );
 }

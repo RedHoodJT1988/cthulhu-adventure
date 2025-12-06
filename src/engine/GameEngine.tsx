@@ -17,7 +17,7 @@ export default function GameEngine({ seed = Date.now(), story = 'moreau', locale
     if (story === 'moreau') return generateMoreauStory(locale);
     return generateStory(runSeed, 5, 2);
   }, [runSeed, story, locale]);
-  const [currentId, setCurrentId] = useState<string>(startId);
+  const [currentId, setCurrentId] = useState<string>(() => startId);
   const [player, setPlayer] = useState<PlayerState>({
     hp: 10,
     sanity: 80,
@@ -27,6 +27,10 @@ export default function GameEngine({ seed = Date.now(), story = 'moreau', locale
   });
 
   const node = nodes[currentId];
+  
+  if (!node) {
+    return <Typography>Loading...</Typography>;
+  }
 
   function applyEffect(effect?: (s: PlayerState) => PlayerState) {
     if (!effect) return;
