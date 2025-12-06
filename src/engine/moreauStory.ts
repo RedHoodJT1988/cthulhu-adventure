@@ -300,14 +300,372 @@ export function generateMoreauStory(locale = 'en') {
       ]
     },
 
-    'm-19': {
-      id: 'm-19',
-      kind: 'ending',
-      title: t('m-19.title'),
-      text: t('m-19.text'),
-      choices: []
-    }
-  };
+      'm-19': {
+        id: 'm-19',
+        kind: 'ending',
+        title: t('m-19.title'),
+        text: t('m-19.text'),
+        choices: []
+      },
 
-  return { nodes, startId: 'm-1' };
+      'm-6': {
+        id: 'm-6',
+        kind: 'scene',
+        title: 'Private Study',
+        text: `Evelyn grants your request with an amused smile. Her study is lined with nautical charts and strange artifacts. A mahogany desk holds a correspondence box, leather-bound ledger, and a painting of a submerged city.`,
+        choices: [
+          { id: 'c-33', text: 'Search the correspondence box', next: 'm-23' },
+          { id: 'c-34', text: 'Examine the painting more closely', next: 'm-24' },
+          { id: 'c-35', text: 'Ask Evelyn direct questions about her interests', next: 'm-25' }
+        ]
+      },
+
+      'm-23': {
+        id: 'm-23',
+        kind: 'scene',
+        title: 'Correspondence',
+        text: `Letters reveal a patron known only as "M" — an auctioneer of relics. Shipment dates and invoices hint at a network. You also find a train ticket to a coastal town and a petrified shell.`,
+        choices: [
+          { id: 'c-36', text: 'Pocket the train ticket and shell', next: 'm-26', effect: (s: PlayerState) => ({ ...s, inventory: [...s.inventory, 'train ticket', 'petrified shell'] }) },
+          { id: 'c-37', text: 'Confront Evelyn with the letters', next: 'm-27' },
+          { id: 'c-38', text: 'Copy the addresses and slip out', next: 'm-10' }
+        ]
+      },
+
+      'm-24': {
+        id: 'm-24',
+        kind: 'scene',
+        title: 'The Submerged City',
+        text: `Behind the painting, you find a safe. Inside: a hand-drawn map of the mansion with the cellar circled in red, and a journal entry dated last week: "The next offering must be pure of mind. The Deep hungers."`,
+        choices: [
+          { id: 'c-39', text: 'Take the map and confront Evelyn', next: 'm-27' },
+          { id: 'c-40', text: 'Take the map and alert Inspector Bellamy', next: 'm-7', effect: (s: PlayerState) => ({ ...s, inventory: [...s.inventory, 'mansion map'] }) },
+          { id: 'c-41', text: 'Read more of the journal', next: 'm-28' }
+        ]
+      },
+
+      'm-25': {
+        id: 'm-25',
+        kind: 'npc',
+        title: 'Questions',
+        text: `Evelyn's smile hardens slightly. "How curious," she says. "Most guests don't pry so openly. Tell me, do you believe in forces beyond the ordinary? In the need to... appease the old hungers?" Her hand drifts toward a bell pull.`,
+        choices: [
+          { id: 'c-42', text: 'Play along; agree with her', next: 'm-29' },
+          { id: 'c-43', text: 'Deny it and demand explanations', next: 'm-27' },
+          { id: 'c-44', text: 'Excuse yourself and leave the study', next: 'm-10' }
+        ]
+      },
+
+      'm-26': {
+        id: 'm-26',
+        kind: 'scene',
+        title: 'The Coastal Lead',
+        text: `The train ticket leads to Innsmouth — a name that stirs a vague dread. The petrified shell has an unnatural geometry. You pocket them and return to the salon, your mind racing with connections.`,
+        choices: [
+          { id: 'c-45', text: 'Share the discovery with Bellamy', next: 'm-30' },
+          { id: 'c-46', text: 'Keep the evidence and investigate alone', next: 'm-31' },
+          { id: 'c-47', text: 'Return to the drawing room and mingle', next: 'm-2' }
+        ]
+      },
+
+      'm-27': {
+        id: 'm-27',
+        kind: 'encounter',
+        title: 'Confrontation',
+        text: `Evelyn's eyes flash with something inhuman. "You've seen too much," she says coldly. The study door locks behind you with a soft click. Masked figures emerge from the shadows.`,
+        choices: [
+          { id: 'c-48', text: 'Fight and try to escape through the window', next: 'm-32' },
+          { id: 'c-49', text: 'Surrender and play for time', next: 'm-18' },
+          { id: 'c-50', text: 'Scream for help', next: 'm-33' }
+        ]
+      },
+
+      'm-28': {
+        id: 'm-28',
+        kind: 'scene',
+        title: 'Dark Pages',
+        text: `The journal reveals ritual instructions, names of past victims, and a prophecy: "When the stars align next, the Deep shall rise. Our lady shall ascend." Tonight is marked with a star.`,
+        choices: [
+          { id: 'c-51', text: 'Rush to find Bellamy and show him', next: 'm-34' },
+          { id: 'c-52', text: 'Search for a phone to call the police', next: 'm-35' },
+          { id: 'c-53', text: 'Find the victims listed and verify', next: 'm-31' }
+        ]
+      },
+
+      'm-29': {
+        id: 'm-29',
+        kind: 'npc',
+        title: 'A Terrible Invitation',
+        text: `Evelyn smiles, delighted. "How wonderful," she whispers. "You're not like the others. Perhaps you could join us. The rite begins at midnight in the cellar. Would you like to witness true power?"`,
+        choices: [
+          { id: 'c-54', text: 'Accept and go to the cellar', next: 'm-36' },
+          { id: 'c-55', text: 'Feign acceptance, then betray her', next: 'm-18' },
+          { id: 'c-56', text: 'Refuse and flee the house', next: 'm-37' }
+        ]
+      },
+
+      'm-30': {
+        id: 'm-30',
+        kind: 'scene',
+        title: 'Bellamy\'s Revelation',
+        text: `Inspector Bellamy's face goes grave. "Innsmouth," he mutters. "I've heard whispers. Missing persons, strange cults. We need to act tonight before this reaches its crescendo. Will you help me search the cellar?"`,
+        choices: [
+          { id: 'c-57', text: 'Search the cellar with Bellamy immediately', next: 'm-18' },
+          { id: 'c-58', text: 'Wait and gather more evidence first', next: 'm-31' }
+        ]
+      },
+
+      'm-31': {
+        id: 'm-31',
+        kind: 'scene',
+        title: 'Careful Investigation',
+        text: `You move through the house, collecting clues. A guest list matches names in an old ledger under the floorboards. Another name — Dr. Crane — appears circled in red.`,
+        choices: [
+          { id: 'c-59', text: 'Confront Dr. Crane directly', next: 'm-12' },
+          { id: 'c-60', text: 'Warn the other guests and evacuate', next: 'm-38' }
+        ]
+      },
+
+      'm-32': {
+        id: 'm-32',
+        kind: 'scene',
+        title: 'The Window',
+        text: `You hurl a chair through the study window and scramble through, landing in the overgrown garden below. Shouts echo behind you. The front gate is locked, but the garden has a path to the woods.`,
+        choices: [
+          { id: 'c-61', text: 'Run for the woods', next: 'm-39' },
+          { id: 'c-62', text: 'Hide in the garden and wait', next: 'm-40' }
+        ]
+      },
+
+      'm-33': {
+        id: 'm-33',
+        kind: 'scene',
+        title: 'The Servants Respond',
+        text: `Your screams bring Marcel and other staff. They stare in confusion — Evelyn's smile falters for a moment. "A misunderstanding," she says smoothly to the servants. But you see the rage behind her eyes.`,
+        choices: [
+          { id: 'c-63', text: 'Demand to leave immediately', next: 'm-37' },
+          { id: 'c-64', text: 'Ask the servants for help', next: 'm-41' }
+        ]
+      },
+
+      'm-34': {
+        id: 'm-34',
+        kind: 'scene',
+        title: 'Bellamy Acts',
+        text: `Inspector Bellamy reads the journal in silence, his jaw tightening. "This is enough. We're stopping this tonight. We'll need to move carefully — some of the guests may be complicit. Stay close to me."`,
+        choices: [
+          { id: 'c-65', text: 'Agree and prepare for the ritual confrontation', next: 'm-18' },
+          { id: 'c-66', text: 'Suggest calling for backup from outside', next: 'm-42' }
+        ]
+      },
+
+      'm-35': {
+        id: 'm-35',
+        kind: 'scene',
+        title: 'The Phone Call',
+        text: `You find a telephone in the hallway and call the police. They promise to send officers within the hour. Now you must keep Evelyn occupied until they arrive without raising suspicion.`,
+        choices: [
+          { id: 'c-67', text: 'Return to the drawing room and act normally', next: 'm-43' },
+          { id: 'c-68', text: 'Try to delay the midnight rite by any means', next: 'm-44' }
+        ]
+      },
+
+      'm-36': {
+        id: 'm-36',
+        kind: 'scene',
+        title: 'The Midnight Descent',
+        text: `You descend with Evelyn and the acolytes into the cellar. The chanting grows louder. You see captives bound in a pattern beneath a starscape of carved glyphs. The idol looms, hungry and vast.`,
+        choices: [
+          { id: 'c-69', text: 'Pretend to participate, then attack the idol', next: 'm-19' },
+          { id: 'c-70', text: 'Scream and attempt to free the captives', next: 'm-15' }
+        ]
+      },
+
+      'm-37': {
+        id: 'm-37',
+        kind: 'scene',
+        title: 'Flight from the House',
+        text: `You grab your coat and head for the door. Evelyn's voice follows you, calm and terrible: "You won't escape what you've learned. The Deep sees all." You burst into the night.`,
+        choices: [
+          { id: 'c-71', text: 'Drive to the nearest police station', next: 'm-45' },
+          { id: 'c-72', text: 'Run to find shelter and call for help', next: 'm-46' }
+        ]
+      },
+
+      'm-38': {
+        id: 'm-38',
+        kind: 'scene',
+        title: 'Evacuation',
+        text: `You warn the other guests. Some laugh nervously; others go pale. Violet believes you immediately. A few guests begin packing to leave. Evelyn watches from the shadows, her expression unreadable.`,
+        choices: [
+          { id: 'c-73', text: 'Help evacuate the guests', next: 'm-47' },
+          { id: 'c-74', text: 'Confront Evelyn directly before anyone leaves', next: 'm-27' }
+        ]
+      },
+
+      'm-39': {
+        id: 'm-39',
+        kind: 'scene',
+        title: 'Into the Woods',
+        text: `The forest is dark and tangled. You run blindly until you reach a stream. In the distance, headlights cut through the trees — a car is searching for you.`,
+        choices: [
+          { id: 'c-75', text: 'Hide by the stream and wait for dawn', next: 'm-48' },
+          { id: 'c-76', text: 'Follow the stream toward town', next: 'm-39a' }
+        ]
+      },
+
+      'm-39a': {
+        id: 'm-39a',
+        kind: 'scene',
+        title: 'The Stream Path',
+        text: `After an hour of walking, you emerge at a small gas station on a rural highway. The attendant is kind and offers you a phone. The police are on their way.`,
+        choices: [
+          { id: 'c-77', text: 'Wait for the police', next: 'm-45' },
+          { id: 'c-78', text: 'Ask the attendant about Moreau House', next: 'm-49' }
+        ]
+      },
+
+      'm-40': {
+        id: 'm-40',
+        kind: 'scene',
+        title: 'Garden Hiding',
+        text: `You crouch behind an old stone wall, watching masked figures search the grounds. Hours pass. At dawn, you slip away toward the road, exhausted.`,
+        choices: [
+          { id: 'c-79', text: 'Hitch a ride away from the house', next: 'm-45' },
+          { id: 'c-80', text: 'Return to confront Evelyn one more time', next: 'm-27' }
+        ]
+      },
+
+      'm-41': {
+        id: 'm-41',
+        kind: 'npc',
+        title: 'The Servants Know',
+        text: `Marcel steps forward. "You speak the truth," he whispers. "She has taken many from this house. I am bound by a contract, but I will not stop you from leaving. Use the west exit — quickly."`,
+        choices: [
+          { id: 'c-81', text: 'Leave with Marcel\'s help', next: 'm-37' },
+          { id: 'c-82', text: 'Ask Marcel to help you stop Evelyn instead', next: 'm-50' }
+        ]
+      },
+
+      'm-42': {
+        id: 'm-42',
+        kind: 'scene',
+        title: 'Backup Requested',
+        text: `Bellamy nods and uses the house phone to request a tactical unit. "They'll be here in two hours. We need to keep this subtle. No alarms." You position yourselves near the cellar entrance to wait.`,
+        choices: [
+          { id: 'c-83', text: 'Wait for backup and execute the plan', next: 'm-18' }
+        ]
+      },
+
+      'm-43': {
+        id: 'm-43',
+        kind: 'scene',
+        title: 'The Long Wait',
+        text: `You return to the drawing room and try to act naturally, though your heart pounds. Violet notices your tension. "Are you alright?" she asks quietly. The guests murmur. Evelyn watches you like a cat.`,
+        choices: [
+          { id: 'c-84', text: 'Confide in Violet', next: 'm-51' },
+          { id: 'c-85', text: 'Excuse yourself and find a place to hide', next: 'm-52' }
+        ]
+      },
+
+      'm-44': {
+        id: 'm-44',
+        kind: 'scene',
+        title: 'Delaying the Rite',
+        text: `You suggest a game of cards, a late dinner, storytelling — anything to delay. Evelyn indulges you, amused, but her patience wears thin. The clock approaches midnight.`,
+        choices: [
+          { id: 'c-86', text: 'Keep stalling until police arrive', next: 'm-53' }
+        ]
+      },
+
+      'm-45': {
+        id: 'm-45',
+        kind: 'ending',
+        title: 'Safe',
+        text: `The police take your statement. An investigation begins into Moreau House. Evidence is secured; Evelyn and her inner circle are arrested. You survive, but you know the Deep has other servants elsewhere.`,
+        choices: []
+      },
+
+      'm-46': {
+        id: 'm-46',
+        kind: 'ending',
+        title: 'Haunted Escape',
+        text: `You hide in a small town for a night, then contact police. They respond swiftly. Evelyn is arrested, but you feel her presence in your dreams — a shadow that never quite leaves.`,
+        choices: []
+      },
+
+      'm-47': {
+        id: 'm-47',
+        kind: 'ending',
+        title: 'Mass Evacuation',
+        text: `Most guests flee Moreau House. The police are called by concerned family members. Evelyn has time to destroy evidence, but the disruption ends her immediate plans. You escape with your life and testimony.`,
+        choices: []
+      },
+
+      'm-48': {
+        id: 'm-48',
+        kind: 'ending',
+        title: 'Survival in Silence',
+        text: `Dawn breaks. You emerge from the woods disheveled but alive. Police find you and take your account. The investigation that follows dismantles Evelyn's network.`,
+        choices: []
+      },
+
+      'm-49': {
+        id: 'm-49',
+        kind: 'scene',
+        title: 'A Terrible Truth',
+        text: `The attendant goes pale. "Moreau House? Three people have gone missing in the past year after visiting there. Police suspect foul play but have no proof." You realize you were meant to be next.`,
+        choices: [
+          { id: 'c-87', text: 'Work with police to gather evidence', next: 'm-45' }
+        ]
+      },
+
+      'm-50': {
+        id: 'm-50',
+        kind: 'scene',
+        title: 'Marcel\'s Choice',
+        text: `Marcel is conflicted, but hatred for Evelyn wins. "I will help," he says. "But we must be quick. The ritual begins at midnight." Together, you plan to sabotage the ceremony.`,
+        choices: [
+          { id: 'c-88', text: 'Move to destroy the idol before the ritual', next: 'm-19' }
+        ]
+      },
+
+      'm-51': {
+        id: 'm-51',
+        kind: 'npc',
+        title: 'Violet\'s Secret',
+        text: `Violet pulls you aside. "I know what she is," she whispers. "I came here to gather evidence for a journalist. Will you help me?"`,
+        choices: [
+          { id: 'c-89', text: 'Join forces with Violet', next: 'm-54' }
+        ]
+      },
+
+      'm-52': {
+        id: 'm-52',
+        kind: 'scene',
+        title: 'A Quiet Corner',
+        text: `You find refuge in the library. The police arrive sooner than expected — someone else also called. Sirens wail. Evelyn\'s mask fully slips as officers enter.`,
+        choices: [
+          { id: 'c-90', text: 'Surrender to police and explain', next: 'm-45' }
+        ]
+      },
+
+      'm-53': {
+        id: 'm-53',
+        kind: 'ending',
+        title: 'Perfect Timing',
+        text: `Just as Evelyn rises to retire to the cellar, police arrive at the house. The timing breaks her spell. She and her acolytes are arrested. Justice is imperfect but swift.`,
+        choices: []
+      },
+
+      'm-54': {
+        id: 'm-54',
+        kind: 'scene',
+        title: 'Allied',
+        text: `Violet and you work together, documenting evidence. The journalist she knows is contacted. Before Evelyn can stop you both, authorities move in.`,
+        choices: [
+          { id: 'c-91', text: 'Expose Evelyn to the world', next: 'm-45' }
+        ]
+      }
+    };  return { nodes, startId: 'm-1' };
 }
